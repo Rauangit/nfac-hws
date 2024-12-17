@@ -1,4 +1,4 @@
-string = "Привет, мир!"
+string = "home work!"
 
 upper_string = string.upper()
 

@@ -1,4 +1,4 @@
-my_string = "Привет"
+my_string = "student"
 
 modified_string = my_string[-1] + my_string[1:-1] + my_string[0]
 

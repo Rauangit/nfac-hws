@@ -1,4 +1,4 @@
-name = input("меня ховут:")
+name = input("меня зовут:")
 age = int(input("мне "))
 
 massege = f"{name}, {age} лет" 
