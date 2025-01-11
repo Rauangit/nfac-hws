@@ -1,6 +1,8 @@
-string = """первая.
+string = """
+первая.
 вторая.
-третья."""
+третья.
+"""
 
-print (string)
+print(string)
 
