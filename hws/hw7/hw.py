@@ -22,10 +22,6 @@ def is_prime(n: int) -> bool:
     
     return True  
 
-
-pass
-
-
 """
 Exercise-2: nth_fibonacci
 Write a function "nth_fibonacci(n: int) -> int" that 
@@ -48,9 +44,6 @@ def nth_fibonacci(n: int) -> int:
     return b
 
 
-
-pass
-
 """
 Exercise-3: factorial
 Write a function "factorial(n: int) -> int" that takes an integer 'n' and returns the factorial of 'n'.
@@ -68,8 +61,7 @@ def factorial(n: int) -> int:
         result *= i
     return result
 
-    
-pass
+
 
 """
 Exercise-4: count_vowels
@@ -94,8 +86,6 @@ def count_vowels(s: str) -> int:
     return count
 
 
-pass
-
 """
 Exercise-5: sum_of_digits
 Write a function "sum_of_digits(n: int) -> int" that 
@@ -118,11 +108,6 @@ def sum_of_digits(n: int) -> int:
     return total
 
 
-
-  
-pass
-
-
 """
 Exercise-6: reverse_string
 Write a function "reverse_string(s: str) -> str" that takes a string 's' and returns the string reversed.
@@ -135,8 +120,6 @@ reverse_string("world") -> "dlrow"
 def reverse_string(s: str) -> str:
     return s[::-1]
 
-
-pass
 
 
 """
@@ -157,10 +140,6 @@ def sum_of_squares(n: int) -> int:
         if i > 0:
             total = total + i**2
     return total
-
-
-
-pass
 
 
 """
@@ -185,10 +164,6 @@ def collatz_sequence_length(n: int) -> int:
     return  lenght 
 
 
-
-pass
-
-
 """
 Exercise-9: is_leap_year
 Write a function "is_leap_year(year: int) -> bool" that takes an 
@@ -207,8 +182,6 @@ def is_leap_year(year: int) -> bool:
         return False
     
 
-
-pass
 
 
 """
@@ -229,9 +202,6 @@ def count_words(s: str) -> int:
 
 
 
-pass 
-
-
 """
 Exercise-11: is_palindrome
 Write a function "is_palindrome(s: str) -> bool" that takes a string 's' and 
@@ -247,14 +217,9 @@ is_palindrome("hello") -> False
 
 def is_palindrome(s: str) -> bool:
     s = s.replace(" ", "").lower()
-    if s == s[::-1]:
-        return True 
-    else:
-        return False  
-    
+    return s == s[::-1]
+  
 
-
-pass 
 """
 Exercise-12: sum_of_multiples
 Write a function "sum_of_multiples(n: int, x: int, y: int) -> int" that 
@@ -274,9 +239,6 @@ def sum_of_multiples(n: int, x: int, y: int) -> int:
     return total
 
 
-pass
-
-
 """
 Exercise-13: gcd
 Write a function "gcd(a: int, b: int) -> int" that takes two integers 'a' and 'b', 
@@ -293,10 +255,6 @@ def gcd(a: int, b: int) -> int:
         return a
     else:
         return gcd(b,a%b)
-
-
-
-pass
 
 """
 Exercise-14: lcm
@@ -317,11 +275,6 @@ def gcd(a: int, b: int) -> int:
 def lcm(a: int, b: int) -> int:
     return abs(a * b) // gcd(a, b)
 
-
-
-pass
-
-
 """
 Exercise-15: count_characters
 Write a function "count_characters(s: str, c: str) -> int" that 
@@ -337,9 +290,6 @@ def count_characters(s: str, c: str) -> int:
 
     return s.count(c)
 
-pass
-
-
 """
 Exercise-16: digit_count
 Write a function "digit_count(n: int) -> int" that takes an 
@@ -353,9 +303,6 @@ digit_count(4567) -> 4
 def digit_count(n: int) -> int:
     return len(str(abs(n)))
    
-pass
-
-
 """
 Exercise-17: is_power_of_two
 Write a function "is_power_of_two(n: int) -> bool" that takes an integer 'n' 
@@ -376,9 +323,6 @@ def is_power_of_two(n: int) -> bool:
         return log_value.is_integer()
 
 
-pass
-
-
 """
 Exercise-18: sum_of_cubes
 Write a function "sum_of_cubes(n: int) -> int" that takes an integer 'n' 
@@ -395,9 +339,6 @@ def sum_of_cubes(n: int) -> int:
     for i in range (1, n+1):
         total += i**3
     return total 
-
-pass
-
 
 """
 Exercise-19: is_perfect_square
@@ -416,9 +357,7 @@ def is_perfect_square(n: int) -> bool:
         return False
     root = math.sqrt(n)
     return root.is_integer()
-    
-pass
-
+  
 
 """
 Exercise-20: is_armstrong_number
@@ -437,5 +376,3 @@ def is_armstrong_number(n: int) -> bool:
     sum_of_powers = sum(int(digit) ** num_digits for digit in digits)
     
     return sum_of_powers == n
-
-pass
