@@ -8,21 +8,15 @@ is_prime(7) -> True
 is_prime(10) -> False
 """
 
-n = int(input("введи чиcло "))
-
 def is_prime(n: int) -> bool:
     if n <= 1:
         return False
-    for i in range(2, n):
+    for i in range(2, int(n ** 0.5) + 1):  
         if n % i == 0:
             return False
     return True
 
 
-
-print(f"{n} — true." * is_prime(n) or f"{n} — false.")
- 
-pass
 
 
 """
@@ -36,25 +30,13 @@ nth_fibonacci(9) -> 21
 """
 
 def nth_fibonacci(n: int) -> int:
- 
- n = int(input("введи цифру "))
-
-def nth_fibonacci(n: int) -> int:
     if n == 0:
         return 0
     elif n == 1:
         return 1
+    else:
+        return nth_fibonacci(n - 1) + nth_fibonacci(n - 2)
     
-    a = 0 
-    b = 1
-    for _ in range(2, n + 1):
-        a, b = b, a + b  
-    
-    return b
-
-print(nth_fibonacci(n))
-
-pass
 
 """
 Exercise-3: factorial
@@ -65,17 +47,13 @@ factorial(5) -> 120
 factorial(6) -> 720
 """
 
-n = int(input("введи цифру "))
+
 
 def factorial(n: int) -> int:
     result = 1
     for i in range(1, n + 1):
         result *= i
     return result
-
-print(factorial(n))
-    
-pass
 
 """
 Exercise-4: count_vowels
@@ -87,7 +65,7 @@ count_vowels("hello") -> 2
 count_vowels("world") -> 1
 """
 
-s = input("введи слова ")
+
 
 def count_vowels(s: str) -> int:
     vowels = "aeiouyAEIOUY"  
@@ -99,10 +77,6 @@ def count_vowels(s: str) -> int:
     
     return count
 
-print(f"{s}",f"{count_vowels(s)}")
-
-pass
-
 """
 Exercise-5: sum_of_digits
 Write a function "sum_of_digits(n: int) -> int" that 
@@ -112,7 +86,6 @@ Example:
 sum_of_digits(12345) -> 15
 sum_of_digits(98765) -> 35
 """
-n = int(input("введи любое чисило "))
 
 def sum_of_digits(n: int) -> int:
     n = abs(n)
@@ -124,11 +97,6 @@ def sum_of_digits(n: int) -> int:
     
     return total
 
-print(sum_of_digits(n))
-
-  
-pass
-
 
 """
 Exercise-6: reverse_string
@@ -139,14 +107,9 @@ reverse_string("hello") -> "olleh"
 reverse_string("world") -> "dlrow"
 """
 
-s = input("введи любое слово ")
-
 def reverse_string(s: str) -> str:
     return s[::-1]
 
-print(reverse_string(s))
-
-pass
 
 
 """
@@ -159,8 +122,6 @@ sum_of_squares(4) -> 30
 sum_of_squares(5) -> 55
 """
 
-n = int(input("введи цифру "))
-
 def sum_of_squares(n: int) -> int:
     total = 0 
     for i in range(1, n+1):
@@ -168,9 +129,7 @@ def sum_of_squares(n: int) -> int:
             total = total + i**2
     return total
 
-print(sum_of_squares(n))
 
-pass
 
 
 """
@@ -182,7 +141,6 @@ Example:
 collatz_sequence_length(6) -> 9
 collatz_sequence_length(27) -> 112
 """
-n = int(input("введи цифру "))
 
 def collatz_sequence_length(n: int) -> int:
     lenght = 1
@@ -194,9 +152,9 @@ def collatz_sequence_length(n: int) -> int:
         lenght += 1
     return  lenght 
 
-print(collatz_sequence_length(n)) 
 
-pass
+
+
 
 
 """
@@ -208,7 +166,6 @@ Example:
 is_leap_year(2000) -> True
 is_leap_year(1900) -> False
 """
-year = int(input("введи цифру "))
 
 def is_leap_year(year: int) -> bool:
     if (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0):
@@ -216,9 +173,7 @@ def is_leap_year(year: int) -> bool:
     else: 
         return False
     
-print(is_leap_year(year))
 
-pass
 
 
 """
@@ -231,15 +186,12 @@ count_words("Hello world") -> 2
 count_words("This is a test") -> 4
 """
 
-word = input("введи слово: ")
 
 def count_words(s: str) -> int:
     words = s.split()  
     return len(words)  
 
-print(count_words(word))  
 
-pass 
 
 
 """
@@ -253,8 +205,6 @@ is_palindrome("racecar") -> True
 is_palindrome("hello") -> False
 """
 
-word = input("введи слово: ")
-
 def is_palindrome(s: str) -> bool:
     s = s.replace(" ", "").lower()
     if s == s[::-1]:
@@ -262,9 +212,7 @@ def is_palindrome(s: str) -> bool:
     else:
         return False  
     
-print(is_palindrome(word))  
 
-pass 
 """
 Exercise-12: sum_of_multiples
 Write a function "sum_of_multiples(n: int, x: int, y: int) -> int" that 
@@ -275,9 +223,6 @@ Example:
 sum_of_multiples(10, 3, 5) -> 33
 sum_of_multiples(20, 7, 11) -> 168
 """
-n = int(input("введи число "))
-x = int(input("введи число "))
-y = int(input("введи число "))
 
 def sum_of_multiples(n: int, x: int, y: int) -> int:
     total = 0 
@@ -286,9 +231,6 @@ def sum_of_multiples(n: int, x: int, y: int) -> int:
             total += i
     return total
 
-print (sum_of_multiples(n, x, y)) 
-
-pass
 
 
 """
@@ -300,8 +242,6 @@ Example:
 gcd(56, 98) -> 14
 gcd(27, 15) -> 3
 """
-a = int(input("введи число "))
-b = int(input("введи число "))
 
 def gcd(a: int, b: int) -> int:
     if b == 0: 
@@ -309,9 +249,6 @@ def gcd(a: int, b: int) -> int:
     else:
         return gcd(b,a%b)
 
-print(gcd(a, b))
-
-pass
 
 """
 Exercise-14: lcm
@@ -332,12 +269,7 @@ def gcd(a: int, b: int) -> int:
 def lcm(a: int, b: int) -> int:
     return abs(a * b) // gcd(a, b)
 
-a = int(input("Введите число a: "))
-b = int(input("Введите число b: "))
 
-print("НОК чисел", a, "и", b, "равен:", lcm(a, b))
-
-pass
 
 
 """
@@ -355,13 +287,6 @@ def count_characters(s: str, c: str) -> int:
 
     return s.count(c)
 
-s = input("Введите строку: ")
-c = input("Введите символ: ")
-
-print(count_characters(s, c))
-
-pass
-
 
 """
 Exercise-16: digit_count
@@ -373,14 +298,10 @@ digit_count(123) -> 3
 digit_count(4567) -> 4
 """
 
-n = int(input("input n "))
 def digit_count(n: int) -> int:
     return len(str(abs(n)))
 
-print(digit_count(n))
-   
-    
-pass
+
 
 
 """
@@ -395,7 +316,6 @@ is_power_of_two(10) -> False
 
 import math
 
-n = int(input("input n "))
 def is_power_of_two(n: int) -> bool:
     if n <= 0:
         return False
@@ -403,9 +323,6 @@ def is_power_of_two(n: int) -> bool:
         log_value = math.log(n, 2)
         return log_value.is_integer()
 
-print(is_power_of_two(n))
-
-pass
 
 
 """
@@ -418,8 +335,6 @@ sum_of_cubes(3) -> 36
 sum_of_cubes(4) -> 100
 """
 
-n = int(input("input n "))
-
 def sum_of_cubes(n: int) -> int: 
     total = 0 
     
@@ -427,9 +342,6 @@ def sum_of_cubes(n: int) -> int:
         total += i**3
     return total 
 
-print(sum_of_cubes(n))
-
-pass
 
 
 """
@@ -444,7 +356,6 @@ is_perfect_square(10) -> False
 
 import math 
 
-n = int(input("input n "))
 
 def is_perfect_square(n: int) -> bool:
     if n < 0:
@@ -452,9 +363,6 @@ def is_perfect_square(n: int) -> bool:
     root = math.sqrt(n)
     return root.is_integer()
 
-print(is_perfect_square(n))
-    
-pass
 
 
 """
@@ -466,7 +374,6 @@ Example:
 is_armstrong_number(153) -> True
 is_armstrong_number(370) -> True
 """
-n = int(input("input n "))
 
 def is_armstrong_number(n: int) -> bool:
     digits = str(n)
@@ -476,6 +383,3 @@ def is_armstrong_number(n: int) -> bool:
     
     return sum_of_powers == n
 
-print(is_armstrong_number(n))
-
-pass
