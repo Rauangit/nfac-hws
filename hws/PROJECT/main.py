@@ -24,6 +24,7 @@ def load_banner_from_file(file_path):
         print(f"Ошибка при загрузке файла: {e}")
         return {}
     
+
 def print_word_in_banner(word, banner_dict):
     """Выводит слово с использованием ASCII-арт символов, корректно обрабатывая символ новой строки."""
     lines_to_print = ['' for _ in range(8)]  
@@ -42,6 +43,7 @@ def print_word_in_banner(word, banner_dict):
     for line in lines_to_print:
         print(line + "$") 
 
+
 def main():
     parser = argparse.ArgumentParser(description='Отобразить слово в ASCII-арт стиле.')
     parser.add_argument('word', type=str, help='Слово для отображения в ASCII-арте')
@@ -56,6 +58,7 @@ def main():
         print_word_in_banner(args.word, banner_dict)
     else:
         print("Не удалось загрузить баннер.")
+
 
 if __name__ == '__main__':
     main()
