@@ -1,2 +1,7 @@
 .idea
 */__pycache__/
+.vscode/
+venv/
+__pycache__/
+*.log
+*.tmp
