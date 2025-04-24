@@ -1,0 +1,21 @@
+<h1>Добавить новую книгу</h1>
+<form method="POST" action="/books">
+  <label>Название: <input type="text" name="title" required></label><br>
+  <label>Автор: <input type="text" name="author" required></label><br>
+  <label>Год: <input type="number" name="year" required></label><br>
+  <label>Страниц: <input type="number" name="total_pages" required></label><br>
+  <label>Жанр: <input type="text" name="genre" required></label><br>
+  <button type="submit">Создать</button>
+</form>
+<a href="/books">← Назад</a>
+
+<h1>{% if book %}Редактировать{% else %}Добавить{% endif %} книгу</h1>
+<form method="POST" action="{% if book %}/books/{{ book.id }}/edit{% else %}/books{% endif %}">
+  <label>Название: <input type="text" name="title" value="{{ book.title if book else '' }}" required></label><br>
+  <label>Автор: <input type="text" name="author" value="{{ book.author if book else '' }}" required></label><br>
+  <label>Год: <input type="number" name="year" value="{{ book.year if book else '' }}" required></label><br>
+  <label>Страниц: <input type="number" name="total_pages" value="{{ book.total_pages if book else '' }}" required></label><br>
+  <label>Жанр: <input type="text" name="genre" value="{{ book.genre if book else '' }}" required></label><br>
+  <button type="submit">{% if book %}Обновить{% else %}Создать{% endif %}</button>
+</form>
+<a href="/books">← Назад</a>
