@@ -1,0 +1,20 @@
+<h1>Добавить цветок</h1>
+<form method="POST" action="/flowers">
+  <label>Название: <input type="text" name="name" required></label><br>
+  <label>Количество: <input type="number" name="quantity" required></label><br>
+  <label>Цена: <input type="number" name="price" step="0.01" required></label><br>
+  <button type="submit">Добавить</button>
+</form>
+
+<h2>Доступные цветы</h2>
+<ul>
+  {% for flower in flowers %}
+    <li>{{ flower.name }} – {{ flower.price }} ₽
+      <form method="POST" action="/cart/items" style="display:inline;">
+        <input type="hidden" name="flower_id" value="{{ flower.id }}">
+        <button type="submit">В корзину</button>
+      </form>
+    </li>
+  {% endfor %}
+</ul>
+<a href="/cart/items">Перейти в корзину</a>

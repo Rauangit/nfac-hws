@@ -1,0 +1,7 @@
+<h1>Профиль</h1>
+<p><strong>Email:</strong> {{ user.email }}</p>
+<p><strong>Имя:</strong> {{ user.full_name }}</p>
+{% if user.photo %}
+  <img src="/static/uploads/{{ user.photo }}" width="150" alt="Фото">
+{% endif %}
+<a href="/flowers">Перейти к цветам</a>

@@ -1,0 +1,7 @@
+<h1>Купленные цветы</h1>
+<ul>
+  {% for flower in flowers %}
+    <li>{{ flower.name }} – {{ flower.price }} ₽</li>
+  {% endfor %}
+</ul>
+<a href="/flowers">Назад к цветам</a>
