@@ -1,0 +1,12 @@
+<h1>Корзина</h1>
+<ul>
+  {% for flower in flowers %}
+    <li>{{ flower.name }} – {{ flower.price }} ₽</li>
+  {% endfor %}
+</ul>
+<p><strong>Общая сумма:</strong> {{ total }} ₽</p>
+
+<form method="POST" action="/purchased">
+  <button type="submit">Купить</button>
+</form>
+<a href="/flowers">Назад к цветам</a>

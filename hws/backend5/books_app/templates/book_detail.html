@@ -1,0 +1,13 @@
+<h1>{{ book.title }}</h1>
+<p><strong>Автор:</strong> {{ book.author }}</p>
+<p><strong>Год издания:</strong> {{ book.year }}</p>
+<p><strong>Страниц:</strong> {{ book.total_pages }}</p>
+<p><strong>Жанр:</strong> {{ book.genre }}</p>
+<a href="/books">← Назад к списку</a>
+
+<form method="POST" action="/books/{{ book.id }}/delete" onsubmit="return confirm('Удалить эту книгу?');">
+  <button type="submit">Удалить</button>
+</form>
+
+<a href="/books/{{ book.id }}/edit">Редактировать</a><br>
+<a href="/books">← Назад к списку</a>
