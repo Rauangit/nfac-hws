@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <title>Редактирование объявления</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-900">
+
+<header class="bg-green-700 text-white py-5 shadow">
+    <div class="max-w-3xl mx-auto text-center">
+        <h1 class="text-3xl font-semibold">Изменить объявление</h1>
+    </div>
+</header>
+
+<main class="max-w-3xl mx-auto mt-12 px-6">
+    <form action="/ads/{{ ad.id }}/edit" method="post" class="bg-white rounded-lg shadow-md p-8 space-y-5">
+        <input
+            type="text"
+            name="title"
+            placeholder="Введите заголовок"
+            value="{{ ad.title }}"
+            required
+            class="w-full rounded border border-gray-300 p-3 focus:outline-none focus:ring-2 focus:ring-green-600"
+        />
+        <textarea
+            name="descr"
+            placeholder="Описание объявления"
+            required
+            rows="5"
+            class="w-full rounded border border-gray-300 p-3 focus:outline-none focus:ring-2 focus:ring-green-600 resize-none"
+        >{{ ad.descr }}</textarea>
+        <input
+            type="number"
+            name="price"
+            placeholder="Цена"
+            value="{{ ad.price }}"
+            required
+            class="w-full rounded border border-gray-300 p-3 focus:outline-none focus:ring-2 focus:ring-green-600"
+        />
+        <input
+            type="text"
+            name="poster"
+            placeholder="URL изображения"
+            value="{{ ad.poster }}"
+            required
+            class="w-full rounded border border-gray-300 p-3 focus:outline-none focus:ring-2 focus:ring-green-600"
+        />
+        <button
+            type="submit"
+            class="w-full bg-green-700 text-white font-semibold py-3 rounded hover:bg-green-800 transition-colors"
+        >
+            Сохранить изменения
+        </button>
+    </form>
+</main>
+
+</body>
+</html>

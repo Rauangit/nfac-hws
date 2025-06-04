@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>VoxPop</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Публичный VoxPop</h1>
+
+  <form id="commentForm">
+    <textarea id="commentText" placeholder="Оставьте комментарий..." required></textarea>
+    <div>
+      <label><input type="radio" name="category" value="positive" required> Позитивный</label>
+      <label><input type="radio" name="category" value="negative"> Негативный</label>
+    </div>
+    <button type="submit">Отправить</button>
+  </form>
+
+  <div id="comments"></div>
+  <button id="loadMoreBtn">Загрузить ещё</button>
+
+  <script src="script.js"></script>
+</body>
+</html>
