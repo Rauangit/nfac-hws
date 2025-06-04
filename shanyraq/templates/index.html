@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Доска объявлений Shanyraq</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+<header class="bg-blue-600 text-white py-6">
+    <div class="container mx-auto flex justify-between items-center">
+        <div>
+            <h1 class="text-3xl font-bold">Доска объявлений</h1>
+            <p class="text-sm mt-2">Находите или размещайте объявления легко и быстро</p>
+        </div>
+        <a href="/ads/create" class="bg-white text-blue-600 font-semibold py-2 px-4 rounded hover:bg-gray-100 transition">
+            Создать объявление
+        </a>
+    </div>
+</header>
+
+<main class="container mx-auto py-10 px-4">
+    <h2 class="text-2xl font-semibold mb-6">Свежие объявления</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {% for ad in ads %}
+        <div class="bg-white rounded-lg shadow-md p-4 flex flex-col">
+            <img src="{{ ad.poster }}" alt="{{ ad.title }}" class="w-full h-40 object-cover rounded" onerror="this.src='/static/default-image.png';">
+            <h3 class="text-lg font-semibold mt-4">{{ ad.title }}</h3>
+            <p class="text-sm text-gray-600 mt-2">{{ ad.descr[:100] }}{% if ad.descr|length > 100 %}...{% endif %}</p>
+            <p class="mt-3 text-blue-600 font-bold text-lg">{{ ad.price }} ₸</p>
+            <a href="/ads/{{ ad.id }}" class="inline-block mt-auto bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition text-center">
+                Подробнее
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</main>
+
+<footer class="bg-gray-200 py-4 mt-10 text-center">
+    <p class="text-sm text-gray-600">© 2025 Объявления.kz. Все права защищены.</p>
+</footer>
+
+</body>
+</html>
