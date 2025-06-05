@@ -1,0 +1,274 @@
+{% load static %}
+{% load humanize %}
+{% now "Y-m-d" as today %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Админская панель</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            margin: 0; padding: 0;
+            height: 100vh;
+        }
+        nav {
+            width: 220px;
+            background: #222;
+            color: white;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        nav a {
+            display: block;
+            color: white;
+            padding: 12px;
+            text-decoration: none;
+            margin-bottom: 10px;
+            border-radius: 4px;
+        }
+        nav a.active, nav a:hover {
+            background: #4CAF50;
+        }
+        main {
+            flex-grow: 1;
+            padding: 30px;
+            overflow-y: auto;
+        }
+        h1 {
+            margin-top: 0;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        form {
+            margin-top: 20px;
+        }
+        label {
+            display: block;
+            margin: 8px 0 4px;
+        }
+        input, select {
+            padding: 6px;
+            width: 100%;
+            max-width: 300px;
+            box-sizing: border-box;
+        }
+        button {
+            margin-top: 12px;
+            padding: 10px 20px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #45a049;
+        }
+        .message {
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <h2>Меню</h2>
+        <a href="?tab=bookings" class="{% if tab == 'bookings' %}active{% endif %}">Заказы на бронь</a>
+        <a href="?tab=orders" class="{% if tab == 'orders' %}active{% endif %}">Заказы по меню</a>
+        <a href="?tab=tables" class="{% if tab == 'tables' %}active{% endif %}">Все столы</a>
+    </nav>
+
+    <main>
+        {% if messages %}
+            {% for message in messages %}
+                <div class="message {% if message.tags %}{{ message.tags }}{% endif %}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+
+        {% if tab == 'bookings' %}
+            <h1>Подтверждённые брони на {{ today }}</h1>
+            {% if bookings %}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Клиент</th>
+                            <th>Стол</th>
+                            <th>Дата</th>
+                            <th>Время</th>
+                            <th>Кол-во людей</th>
+                            <th>Статус</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for b in bookings %}
+                        <tr>
+                            <td>{{ b.client.username }}</td>
+                            <td>
+                                {% if b.table %}
+                                    {{ b.table.number }}
+                                {% else %}
+                                    Не выбран
+                                {% endif %}
+                            </td>
+                            <td>{{ b.date }}</td>
+                            <td>{{ b.time }}</td>
+                            <td>{{ b.number_of_people }}</td>
+                            <td>{{ b.get_status_display }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>Подтверждённых броней нет.</p>
+            {% endif %}
+
+            <h1>Новые заявки на рассмотрении</h1>
+            {% if pending_bookings %}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Клиент</th>
+                            <th>Стол</th>
+                            <th>Дата</th>
+                            <th>Время</th>
+                            <th>Кол-во людей</th>
+                            <th>Статус</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for b in pending_bookings %}
+                        <tr>
+                            <td>{{ b.client.username }}</td>
+                            <td>
+                                {% if b.table %}
+                                    {{ b.table.number }}
+                                {% else %}
+                                    Не выбран
+                                {% endif %}
+                            </td>
+                            <td>{{ b.date }}</td>
+                            <td>{{ b.time }}</td>
+                            <td>{{ b.number_of_people }}</td>
+                            <td>{{ b.get_status_display }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>Новых заявок нет.</p>
+            {% endif %}
+        {% elif tab == 'orders' %}
+            <h1>Заказы по меню</h1>
+            {% if orders %}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Клиент</th>
+                            <th>Бронь</th>
+                            <th>Статус</th>
+                            <th>Создан</th>
+                            <th>Пункты заказа</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for o in orders %}
+                        <tr>
+                            <td>{{ o.id }}</td>
+                            <td>{{ o.client.username }}</td>
+                            <td>{{ o.booking.date }} {{ o.booking.time }}</td>
+                            <td>{{ o.get_status_display }}</td>
+                            <td>{{ o.created_at }}</td>
+                            <td>
+                                <ul>
+                                    {% for item in o.items.all %}
+                                        <li>{{ item.name }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>Заказов нет.</p>
+            {% endif %}
+            {% elif tab == 'tables' %}
+            <h1>Все столы</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Номер стола</th>
+                        <th>Вместимость</th>
+                        <th>Доступен</th>
+                        <th>Изменить статус</th>
+                        <th>Забронировать клиенту</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for table in tables %}
+                    <tr>
+                        <td>{{ table.number }}</td>
+                        <td>{{ table.capacity }}</td>
+                        <td>{{ table.is_available|yesno:"Да,Нет" }}</td>
+                        <td>
+                            <form method="post" style="display:inline;">
+                                {% csrf_token %}
+                                <input type="hidden" name="table_id" value="{{ table.id }}">
+                                <button type="submit" name="toggle_table_status">
+                                    {% if table.is_available %}
+                                        Пометить как занятый
+                                    {% else %}
+                                        Пометить как свободен
+                                    {% endif %}
+                                </button>
+                            </form>
+                        </td>
+                        <td>
+                            <form method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="table_id" value="{{ table.id }}">
+                                <label>Клиент:</label>
+                                <select name="client_id" required>
+                                    <option value="">Выберите клиента</option>
+                                    {% for client in clients %}
+                                        <option value="{{ client.id }}">{{ client.username }}</option>
+                                    {% endfor %}
+                                </select>
+                                <label>Дата:</label>
+                                <input type="date" name="date" value="{{ today }}" required>
+                                <label>Время:</label>
+                                <input type="time" name="time" required>
+                                <label>Кол-во людей:</label>
+                                <input type="number" name="number_of_people" min="1" value="1" required>
+                                <button type="submit" name="create_booking">Забронировать</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+            

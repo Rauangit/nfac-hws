@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ item.name }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 40px;
+        }
+        .btn {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>{{ item.name }}</h1>
+    <p><strong>Описание:</strong> {{ item.description }}</p>
+    <p><strong>Время приготовления:</strong> {{ item.preparation_time }}</p>
+    <p><strong>Цена:</strong> {{ item.price }} руб.</p>
+    <p><strong>Статус:</strong> {% if item.is_in_stop_list %}❌ В стоп-листе{% else %}✅ В наличии{% endif %}</p>
+
+    <a href="{% url 'client_home' %}" class="btn">← Назад</a>
+</body>
+</html>
+
+<form method="post" action="{% url 'add_to_order' item.id %}">
+    {% csrf_token %}
+    <button type="submit" class="btn">Добавить в заказ</button>
+</form>
+

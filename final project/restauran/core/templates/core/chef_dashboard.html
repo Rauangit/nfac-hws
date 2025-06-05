@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<h1>Панель шефа</h1>
+
+<h2>Заказы по меню</h2>
+<table border="1" cellpadding="6">
+    <thead>
+        <tr>
+            <th>ID заказа</th>
+            <th>Клиент</th>
+            <th>Дата и время брони</th>
+            <th>Статус</th>
+            <th>Пункты заказа</th>
+            <th>Изменить статус</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for order in orders %}
+        <tr>
+            <td>{{ order.id }}</td>
+            <td>{{ order.client.username }}</td>
+            <td>{{ order.booking.date }} {{ order.booking.time }}</td>
+            <td>{{ order.get_status_display }}</td>
+            <td>
+                <ul>
+                    {% for item in order.items.all %}
+                    <li>{{ item.name }}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>
+                <form method="post" style="display:inline;">
+                    {% csrf_token %}
+                    <input type="hidden" name="order_id" value="{{ order.id }}">
+                    <select name="new_status" required>
+                        <option value="pending" {% if order.status == "pending" %}selected{% endif %}>В ожидании</option>
+                        <option value="in_progress" {% if order.status == "in_progress" %}selected{% endif %}>В работе</option>
+                        <option value="completed" {% if order.status == "completed" %}selected{% endif %}>Выполнен</option>
+                        <option value="cancelled" {% if order.status == "cancelled" %}selected{% endif %}>Отменён</option>
+                    </select>
+                    <button type="submit" name="change_order_status">Обновить</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<hr>
+
+<h2>Добавить новое блюдо</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" name="add_menu_item">Добавить блюдо</button>
+</form>
+
+<hr>
+<h2>Стоп-лист</h2>
+<table border="1" cellpadding="6">
+    <thead>
+        <tr>
+            <th>Название блюда</th>
+            <th>В стоп-листе</th>
+            <th>Действие</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in menu_items %}
+        <tr>
+            <td>{{ item.name }}</td>
+            <td>{{ item.is_in_stop_list|yesno:"Да,Нет" }}</td>
+            <td>
+                <form method="post" style="display:inline;">
+                    {% csrf_token %}
+                    <input type="hidden" name="item_id" value="{{ item.id }}">
+                    <button type="submit" name="toggle_stop_list">
+                        {% if item.is_in_stop_list %}
+                            Снять со стоп-листа
+                        {% else %}
+                            В стоп-лист
+                        {% endif %}
+                    </button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

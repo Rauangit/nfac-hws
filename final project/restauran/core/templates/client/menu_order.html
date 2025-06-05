@@ -1,0 +1,17 @@
+<h1>Заказ для брони {{ booking.id }}</h1>
+<p>Дата: {{ booking.date }} Время: {{ booking.time }}</p>
+
+{% if order %}
+  <h2>Ваш заказ (статус: {{ order.get_status_display }})</h2>
+  <ul>
+  {% for item in items %}
+    <li>{{ item.name }} — {{ item.price }} ₽</li>
+  {% empty %}
+    <li>Заказ пуст</li>
+  {% endfor %}
+  </ul>
+{% else %}
+  <p>Пока нет активного заказа для этой брони.</p>
+{% endif %}
+
+<a href="{% url 'menu' %}">Перейти к меню и добавить блюда</a>

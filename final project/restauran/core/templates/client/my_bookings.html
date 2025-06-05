@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">Мои забронированные столы</h2>
+
+    {% if bookings %}
+        <div class="list-group mb-5">
+            {% for booking in bookings %}
+                <div class="list-group-item">
+                    <strong>Стол №{{ booking.table.number }}</strong> — {{ booking.date }} {{ booking.time }}
+                    <div class="mt-2">
+                        <a href="{% url 'menu_order' booking.id %}" class="btn btn-sm btn-primary">Заказать по меню</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>У вас нет активных броней.</p>
+    {% endif %}
+
+    <h3>Мои заказы по меню</h3>
+    {% if menu_orders %}
+        <ul class="list-group">
+            {% for order in menu_orders %}
+                <li class="list-group-item">
+                    {{ order.item.name }} — {{ order.quantity }} шт. — {{ order.created_at|date:"d.m.Y H:i" }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Вы ещё не делали заказов по меню.</p>
+    {% endif %}
+</div>
+{% endblock %}

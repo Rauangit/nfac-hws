@@ -1,0 +1,15 @@
+<!-- templates/core/available_tables.html -->
+
+<h2>Свободные столы</h2>
+<ul>
+  {% for table in tables %}
+    <li>
+      Стол №{{ table.number }} (мест: {{ table.capacity }}) -
+      <a href="{% url 'request_booking' table.id %}">Забронировать</a>
+    </li>
+  {% empty %}
+    <li>Свободных столов нет</li>
+  {% endfor %}
+</ul>
+
+<a href="{% url 'client_home' %}">Назад на главную</a>
